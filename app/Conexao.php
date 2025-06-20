@@ -16,7 +16,7 @@ class Conexao {
                 $db_user = getenv('DB_USER');
                 $db_pass = getenv('DB_PASS');
 
-                self::$pdo = new PDO("mysql:host={$db_host};dbname={$db_name}", $db_user, $db_pass);
+                self::$pdo = new PDO("mysql:host={$db_host};dbname={$db_name};charset=utf8", $db_user, $db_pass);
                 self::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             } catch ( PDOException $exception ) {
                 die('Erro na conexão: ' . $exception->getMessage());

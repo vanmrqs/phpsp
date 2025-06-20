@@ -11,7 +11,11 @@ class Usuario {
     public static function validar_credenciais(string $email, string $senha) {
         $pdo = Conexao::conectar();
 
-        $sql = "SELECT *
+        $sql = "SELECT
+                    usuario.id,
+                    usuario.nome,
+                    usuario.senha,
+                    usuario.tipo_usuario_id
                 FROM usuario
                 WHERE email = :email
                 LIMIT 1";
