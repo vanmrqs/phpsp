@@ -1,0 +1,18 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Roboto", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: normal;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+}
+
+button {
+    background: $cor_primaria;
+    border: none;
+    border-radius: 2px;
+    color: #fff;
+    cursor: pointer;
+    padding: 5px;
+}

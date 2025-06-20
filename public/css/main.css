@@ -1,0 +1,43 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: normal;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+}
+
+button {
+  background: #005599;
+  border: none;
+  border-radius: 2px;
+  color: #fff;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.login {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+.login-section {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+.login-section-info {
+  background: #005599;
+  color: #fff;
+}
+.login-section-form {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/*# sourceMappingURL=main.css.map */

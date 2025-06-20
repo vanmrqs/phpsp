@@ -1,0 +1,25 @@
+.login {
+    display: flex;
+    height: 100%;
+    width: 100%;
+
+    &-section {
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        height: 100%;
+        width: 100%;
+
+        &-info {
+            background: $cor_primaria;
+            color: #fff;
+        }
+
+        &-form {
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+    }
+}

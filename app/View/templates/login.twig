@@ -1,0 +1,23 @@
+{% include 'base/head.twig' %}
+
+<main class="login">
+    <section class="login-section login-section-info">
+        <h1> PHP SP </h1>
+    </section>
+
+    <section class="login-section login-section-form">
+        <form method="post" action="/login">
+            <label for="input-email"> E-mail </label>
+            <input name="email" type="email" id="input-email"{% if email %} value="{{ email }}" {% endif %}>
+
+            <label for="input-senha"> Senha </label>
+            <input name="senha" type="password" id="input-senha">
+
+            {% if erro %}
+                <p class="mensagem_erro"> {{ erro }} </p>
+            {% endif %}
+
+            <button type="submit"> Entrar </button>
+        </form>
+    </section>
+</main>

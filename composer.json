@@ -1,0 +1,22 @@
+{
+    "name": "gabri/phpsp",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Controller\\": "app/Controller/",
+            "Model\\": "app/Model/",
+            "View\\": "app/View/"
+        }
+    },
+    "authors": [
+        {
+            "name": "vanmrqs",
+            "email": "vanmrqs@outlook.com.br"
+        }
+    ],
+    "require": {
+        "twig/twig": "*",
+        "altorouter/altorouter": "^2.0",
+        "vlucas/phpdotenv": "^5.6"
+    }
+}
