@@ -7,17 +7,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 $router = new AltoRouter();
 
 //
-// Index
-//
-$router->map('GET', '/', function () {
-    require_once __DIR__ . '/../app/Controller/HomeController.php';
-
-    $home = new Controller\HomeController();
-    $home->index();
-});
-
-//
-// LoginController
+// Login
 //
 $router->map('GET|POST', '/login', function() {
     require_once __DIR__ . '/../app/Controller/LoginController.php';
@@ -31,13 +21,27 @@ $router->map('GET|POST', '/login', function() {
 });
 
 //
-// Pagamentos
+// Pagamento
 //
+$router->map('GET', '/pagamento', function () {
+    require_once __DIR__ . '/../app/Controller/PagamentoController.php';
+
+    $pagamento = new Controller\PagamentoController();
+    $pagamento->index();
+});
+
 $router->map('GET', '/pagamento/editar/[i:id]', function(int $pagamento_id) {
     require_once __DIR__ . '/../app/Controller/PagamentoController.php';
 
     $pagamento = new \Controller\PagamentoController();
     $pagamento->editar($pagamento_id);
+});
+
+$router->map('POST', '/pagamento/comentar', function() {
+    require_once __DIR__ . '/../app/Controller/PagamentoController.php';
+
+    $pagamento = new \Controller\PagamentoController();
+    $pagamento->set_comentario();
 });
 
 $match = $router->match();

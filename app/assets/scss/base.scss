@@ -12,15 +12,11 @@ h1 {
     font-size: 35px;
 
     &:after {
-        background: $cor_secundaria;
-        content: "";
-        display: block;
+        @include titulo_after;
         height: 5px;
         left: 2px;
-        position: relative;
         top: -2px;
         width: 35px;
-        z-index: -1;
     }
 
     & + h3 {
@@ -45,7 +41,7 @@ table {
         height: 40px;
 
         &:nth-child(even) {
-            background: #0055991c;
+            background: $cor_primaria_light;
         }
 
         td {
@@ -60,6 +56,7 @@ button {
     border-radius: 2px;
     color: #fff;
     cursor: pointer;
+    height: 35px;
     padding: 5px;
     transition: all 0.2s;
 }
@@ -68,6 +65,10 @@ a {
     color: $cor_primaria;
     font-size: 12px;
     text-transform: uppercase;
+}
+
+textarea {
+    outline: none;
 }
 
 .section-principal {

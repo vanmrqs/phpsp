@@ -38,6 +38,30 @@
             </tbody>
         </table>
 
-        <a href="/" class="botao-secundario"> Voltar </a>
+        <section>
+            <form method="post" action="/pagamento/comentar" class="pagamento-form">
+                <input type="hidden" name="pagamento_id" value="{{ pagamento.id }}">
+
+                <label for="input-pagamento-comentario"> Algum problema? </label>
+                <small> Caso tenha algo errado com o seu pagamento ou com os valores, nos conte aqui, para resolvermos o mais rápido possível</small>
+                <textarea name="comentario" id="input-pagamento-comentario" rows="5"></textarea>
+
+                <button type="submit" class="mt-1"> Enviar </button>
+            </form>
+
+            <section>
+                {% for comentario in comentarios %}
+                    <div class="comentario">
+                        <p class="comentario-autor"> {{ pagamento.nome }} </p>
+
+                        <small> Adicionado em: {{ comentario.data_criacao }} </small>
+
+                        <p> {{ comentario.texto }} </p>
+                    </div>
+                {% endfor %}
+            </section>
+        </section>
+
+        <a href="/pagamento" class="botao-secundario mb-5"> Voltar </a>
     </section>
 </main>

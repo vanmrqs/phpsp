@@ -95,4 +95,34 @@ class Pagamento {
         $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
         return $resultado ?: null;
     }
+
+    public function get_comentarios(int $pagamento_id): ?array {
+        $sql = "SELECT 
+                    pagamento_comentario.id,
+                    pagamento_comentario.pagamento_id,
+                    pagamento_comentario.texto,
+                    DATE_FORMAT(pagamento_comentario.data_criacao, '%d/%m/%Y às %H:%i:%s') AS data_criacao
+                FROM pagamento_comentario
+                WHERE pagamento_id = :pagamento_id
+                ORDER BY data_criacao DESC";
+
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(':pagamento_id', $pagamento_id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $comentarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $comentarios ?: null;
+    }
+
+
+    public function set_comentario(int $pagamento_id, string $comentario): bool {
+        $sql = "INSERT INTO pagamento_comentario (pagamento_id, texto)
+                VALUES (:pagamento_id, :texto)";
+
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(':pagamento_id', $pagamento_id, PDO::PARAM_INT);
+        $stmt->bindParam(':texto', $comentario, PDO::PARAM_STR);
+
+        return $stmt->execute();
+    }
 }
