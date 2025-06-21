@@ -5,12 +5,7 @@ namespace Model;
 use App\Conexao;
 use PDO;
 
-class Pagamento {
-    private PDO $pdo;
-
-    public function __construct() {
-        $this->pdo = Conexao::conectar();
-    }
+class Pagamento extends Model {
     public function get(int $pagamento_id): ?array {
         $sql = "SELECT 
                     pagamento.id,
@@ -139,6 +134,21 @@ class Pagamento {
         $stmt->bindValue(':descontos', $descontos);
         $stmt->bindValue(':pagamento_id', $pagamento_id, PDO::PARAM_INT);
 
-        return $stmt->execute();
+        $sucesso = $stmt->execute();
+
+        if ( $sucesso ) {
+            $sql = "UPDATE pagamento
+                    SET pagamento.valor = ( pagamento.valor + :bonus - :descontos )
+                    WHERE pagamento.id = :pagamento_id";
+
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->bindValue(':bonus', $bonus);
+            $stmt->bindValue(':descontos', $descontos);
+            $stmt->bindValue(':pagamento_id', $pagamento_id, PDO::PARAM_INT);
+
+            return $stmt->execute();
+        }
+
+        return false;
     }
 }

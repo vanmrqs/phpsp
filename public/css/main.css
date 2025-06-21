@@ -104,10 +104,11 @@ small {
 }
 
 .section-principal {
-  margin-left: 250px;
+  margin-top: 85px;
   padding-left: 80px;
   padding-right: 80px;
   padding-top: 20px;
+  position: relative;
 }
 
 .login {
@@ -133,18 +134,40 @@ small {
   justify-content: center;
 }
 
-aside.menu {
-  background: #005599;
-  height: 100%;
+nav.menu {
+  background: #fff;
+  box-shadow: 0 2px 0 0 #f5f5f5;
+  height: 85px;
+  padding: 10px 80px;
   position: fixed;
-  width: 250px;
+  top: 0;
+  width: 100%;
+  z-index: 10;
 }
-aside.menu ul {
+nav.menu ul {
   list-style: none;
-  color: #fff;
-  font-size: 20px;
-  line-height: 40px;
-  text-decoration: underline;
+}
+nav.menu ul li a {
+  color: #4a4a4a;
+  font-size: 16px;
+  text-decoration: none;
+  text-transform: unset;
+}
+nav.menu ul li a:after {
+  content: "";
+  display: block;
+  height: 2px;
+  position: relative;
+  top: 5px;
+  transition: all 0.5s;
+  width: 100%;
+}
+nav.menu ul li a:hover:after {
+  background: #994400;
+  top: 2px;
+}
+nav.menu img {
+  height: 60px;
 }
 
 .btn-pagamento-editar {

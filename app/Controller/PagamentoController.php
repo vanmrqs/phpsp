@@ -72,7 +72,7 @@ class PagamentoController extends Controller {
 
         if ( isset($_POST['bonus'], $_POST['descontos']) ) {
             $pagamentoModel->edit($pagamento_id, $_POST['bonus'], $_POST['descontos']);
-            header('Location: /pagamento/view/' . $pagamento_id);
+            header('Location: /pagamentos/view/' . $pagamento_id);
             exit;
         }
 
@@ -90,12 +90,12 @@ class PagamentoController extends Controller {
         $comentario   = trim($_POST['comentario']);
 
         if ( ! $pagamento_id || ! $comentario ) {
-            header('Location: /pagamento/view/' . $pagamento_id);
+            header('Location: /pagamentos/view/' . $pagamento_id);
         }
 
         $pagamentoModel = new \Model\Pagamento();
         $pagamentoModel->set_comentario($pagamento_id, $comentario);
 
-        header('Location: /pagamento/view/' . $pagamento_id);
+        header('Location: /pagamentos/view/' . $pagamento_id);
     }
 }

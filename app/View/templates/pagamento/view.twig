@@ -9,7 +9,7 @@
             <h3> Colaborador: {{ pagamento.nome }} ({{ pagamento.cargo }}) </h3>
 
             {% if is_admin %}
-                <a href="/pagamento/edit/{{ pagamento.id }}" class="botao-primario btn-pagamento-editar"> <i class="fa-solid fa-pen"></i> </a>
+                <a href="/pagamentos/edit/{{ pagamento.id }}" class="botao-primario btn-pagamento-editar"> <i class="fa-solid fa-pen"></i> </a>
             {% endif %}
         </section>
 
@@ -45,7 +45,7 @@
         </table>
 
         <section>
-            <form method="post" action="/pagamento/comentar" class="pagamento-form">
+            <form method="post" action="/pagamentos/comentar" class="pagamento-form">
                 <input type="hidden" name="pagamento_id" value="{{ pagamento.id }}">
 
                 <label for="input-pagamento-comentario"> Algum problema? </label>
@@ -68,6 +68,6 @@
             </section>
         </section>
 
-        <a href="/pagamento" class="botao-secundario mb-5"> Voltar </a>
+        <a href="/pagamentos" class="botao-secundario mb-5"> Voltar </a>
     </section>
 </main>

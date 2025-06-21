@@ -9,7 +9,7 @@
             <h3> Colaborador: {{ pagamento.nome }} ({{ pagamento.cargo }}) </h3>
         </section>
 
-        <form method="post" action="/pagamento/edit/{{ pagamento.id }}" class="d-flex">
+        <form method="post" action="/pagamentos/edit/{{ pagamento.id }}" class="d-flex">
             <div class="d-flex flex-column">
                 <label for="input-salario-base"> Salário Base </label>
                 <input type="text" id="input-salario-base" name="salario-base" value="{{ pagamento.detalhes.salario_base }}" readonly>

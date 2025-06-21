@@ -10,7 +10,7 @@ $router = new AltoRouter();
 // Login
 //
 $router->map('GET', '/', function () {
-    header("Location: /pagamento");
+    header("Location: /pagamentos");
 });
 
 $router->map('GET|POST', '/login', function() {
@@ -27,32 +27,42 @@ $router->map('GET|POST', '/login', function() {
 //
 // Pagamento
 //
-$router->map('GET', '/pagamento', function () {
+$router->map('GET', '/pagamentos', function () {
     require_once __DIR__ . '/../app/Controller/PagamentoController.php';
 
     $pagamento = new Controller\PagamentoController();
     $pagamento->index();
 });
 
-$router->map('GET', '/pagamento/view/[i:id]', function(int $pagamento_id) {
+$router->map('GET', '/pagamentos/view/[i:id]', function(int $pagamento_id) {
     require_once __DIR__ . '/../app/Controller/PagamentoController.php';
 
     $pagamento = new \Controller\PagamentoController();
     $pagamento->view($pagamento_id);
 });
 
-$router->map('GET|POST', '/pagamento/edit/[i:id]', function(int $pagamento_id) {
+$router->map('GET|POST', '/pagamentos/edit/[i:id]', function(int $pagamento_id) {
     require_once __DIR__ . '/../app/Controller/PagamentoController.php';
 
     $pagamento = new \Controller\PagamentoController();
     $pagamento->edit($pagamento_id);
 });
 
-$router->map('POST', '/pagamento/comentar', function() {
+$router->map('POST', '/pagamentos/comentar', function() {
     require_once __DIR__ . '/../app/Controller/PagamentoController.php';
 
     $pagamento = new \Controller\PagamentoController();
     $pagamento->set_comentario();
+});
+
+//
+// Usuário
+//
+$router->map('GET', '/usuarios', function () {
+    require_once __DIR__ . '/../app/Controller/UsuarioController.php';
+
+    $usuario = new Controller\UsuarioController();
+    $usuario->index();
 });
 
 $match = $router->match();

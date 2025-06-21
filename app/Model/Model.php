@@ -2,8 +2,12 @@
 
 namespace Model;
 
+use App\Conexao;
+
 class Model {
-    public $conexao;
+    protected $pdo;
 
-
+    public function __construct() {
+        $this->pdo = Conexao::conectar();
+    }
 }
