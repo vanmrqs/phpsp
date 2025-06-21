@@ -8,6 +8,40 @@ body {
   font-variation-settings: "wdth" 100;
 }
 
+h1 {
+  font-size: 35px;
+}
+h1:after {
+  background: #994400;
+  content: "";
+  display: block;
+  height: 5px;
+  left: 2px;
+  position: relative;
+  top: -2px;
+  width: 35px;
+  z-index: -1;
+}
+
+table {
+  width: 100%;
+}
+table thead {
+  background: #005599;
+  color: #fff;
+  font-weight: 100;
+  height: 40px;
+}
+table tr {
+  height: 40px;
+}
+table tr:nth-child(even) {
+  background: rgba(0, 85, 153, 0.1098039216);
+}
+table tr td {
+  padding: 0 15px;
+}
+
 button {
   background: #005599;
   border: none;
@@ -15,6 +49,13 @@ button {
   color: #fff;
   cursor: pointer;
   padding: 5px;
+}
+
+.section-principal {
+  margin-left: 250px;
+  padding-left: 80px;
+  padding-right: 80px;
+  padding-top: 20px;
 }
 
 .login {
@@ -38,6 +79,20 @@ button {
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+aside.menu {
+  background: #005599;
+  height: 100%;
+  position: fixed;
+  width: 250px;
+}
+aside.menu ul {
+  list-style: none;
+  color: #fff;
+  font-size: 20px;
+  line-height: 40px;
+  text-decoration: underline;
 }
 
 /*# sourceMappingURL=main.css.map */

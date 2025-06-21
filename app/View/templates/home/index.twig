@@ -3,7 +3,7 @@
 <main class="home">
     {% include 'base/menu.twig' %}
 
-    <section>
+    <section class="section-principal">
         {% if is_admin %}
             <h1> Pagamentos </h1>
 
@@ -23,7 +23,7 @@
                         <td> {{ pagamento.colaborador_nome }} </td>
                         <td> {{ pagamento.colaborador_cargo }} </td>
                         <td> {{ pagamento.mes }}/{{ pagamento.ano }} </td>
-                        <td> {{ pagamento.valor }} </td>
+                        <td> R$ {{ pagamento.valor }} </td>
                         <td> Editar/contestar </td>
                     </tr>
                 {% endfor %}
@@ -45,7 +45,7 @@
                 {% for pagamento in pagamentos %}
                     <tr>
                         <td> {{ pagamento.mes }}/{{ pagamento.ano }} </td>
-                        <td> {{ pagamento.valor }} </td>
+                        <td> R$ {{ pagamento.valor }} </td>
                         <td> Contestar </td>
                     </tr>
                 {% endfor %}

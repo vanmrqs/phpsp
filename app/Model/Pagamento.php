@@ -18,16 +18,17 @@ class Pagamento {
             SELECT 
                 pagamento.id,
                 pagamento.usuario_id,
-                FROM_UNIXTIME(pagamento.timepagamento, '%m') AS mes,
-                FROM_UNIXTIME(pagamento.timepagamento, '%Y') AS ano,
+                LPAD(MONTH(pagamento.timepagamento), 2, '0') AS mes,
+                YEAR(pagamento.timepagamento) AS ano,
                 pagamento.valor,
                 usuario.nome AS colaborador_nome,
                 usuario.cargo AS colaborador_cargo
             FROM pagamento
             INNER JOIN usuario
                 ON usuario.id = pagamento.usuario_id
-            ORDER BY pagamento.timepagamento DESC
-        ";
+            ORDER BY
+                pagamento.timepagamento DESC,
+                usuario.nome";
 
         $stmt = $this->pdo->query($sql);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -37,14 +38,15 @@ class Pagamento {
     public function get_by_user_id(int $usuario_id): array {
         $sql = "
             SELECT 
-                id,
-                usuario_id,
-                timepagamento,
+                pagamento.id,
+                pagamento.usuario_id,
+                LPAD(MONTH(pagamento.timepagamento), 2, '0') AS mes,
+                YEAR(pagamento.timepagamento) AS ano,
                 valor
             FROM pagamento
             WHERE usuario_id = :usuario_id
-            ORDER BY timepagamento DESC
-        ";
+            ORDER BY
+                timepagamento DESC";
 
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindParam(':usuario_id', $usuario_id, PDO::PARAM_INT);
