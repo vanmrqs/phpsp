@@ -9,6 +9,10 @@ $router = new AltoRouter();
 //
 // Login
 //
+$router->map('GET', '/', function () {
+    header("Location: /pagamento");
+});
+
 $router->map('GET|POST', '/login', function() {
     require_once __DIR__ . '/../app/Controller/LoginController.php';
 

@@ -31,20 +31,22 @@ class PagamentoController extends Controller {
 
         $usuario    = $_SESSION['usuario'];
 
-        //@TODO: Especificar qual a vulnerabilidade pela falta desse IF
-        // ou trocar esse if para ver de outras pessoas
-        /*$is_admin   = (int)$usuario->tipo_usuario_id === Constants::TIPO_USUARIO_ADMIN;
+        $is_admin   = (int)$usuario->tipo_usuario_id === Constants::TIPO_USUARIO_ADMIN;
 
-        if ( ! $is_admin ) {
+        $pagamentoModel = new \Model\Pagamento();
+        $pagamento      = (object)$pagamentoModel->get($pagamento_id);
+
+        //@TODO: Especificar qual a vulnerabilidade pela falta desse IF
+        //@TODO: Access Broken Control
+        /*if ( ! $is_admin && $pagamento->usuario_id !== $usuario->id ) {
             $this->view->render('erro', [
                 'mensagem' => 'Acesso não autorizado'
             ], 401);
         }*/
 
-        $pagamentoModel = new \Model\Pagamento();
-        $pagamento      = (object)$pagamentoModel->get($pagamento_id);
         $detalhes       = $pagamentoModel->get_detalhes($pagamento->id);
         $this->view->render('pagamento/view', [
+            'is_admin'    => $is_admin,
             'pagamento'   => $pagamento,
             'detalhes'    => $detalhes,
             'comentarios' => $pagamentoModel->get_comentarios($pagamento->id)
