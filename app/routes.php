@@ -18,10 +18,17 @@ $router->map('GET|POST', '/login', function() {
 
     $login = new \Controller\LoginController();
     if ( $_SERVER['REQUEST_METHOD'] === 'POST' ) {
-        $login->autenticar();
+        $login->login();
     } else {
         $login->index();
     }
+});
+
+$router->map('GET', '/logout', function() {
+    require_once __DIR__ . '/../app/Controller/LoginController.php';
+
+    $login = new \Controller\LoginController();
+    $login->logout();
 });
 
 //

@@ -14,8 +14,10 @@ class PagamentoController extends Controller {
 
         $pagamento = new Pagamento();
         $this->view->render('pagamento/index', [
-            'is_admin'   => $is_admin,
-            'pagamentos' => ( $is_admin ) ? $pagamento->get_all() : $pagamento->get_by_user_id($usuario->id)
+            'is_admin'            => $is_admin,
+            'usuario'             => $usuario,
+            'exibir_nome_e_cargo' => $is_admin,
+            'pagamentos'          => ( $is_admin ) ? $pagamento->get_all() : $pagamento->get_by_user_id($usuario->id)
         ]);
     }
 
@@ -38,10 +40,10 @@ class PagamentoController extends Controller {
         }*/
 
         $this->view->render('pagamento/view', [
-            'is_admin'            => $is_admin,
-            'exibir_nome_e_cargo' => $is_admin,
-            'pagamento'           => $pagamento,
-            'comentarios'         => $pagamentoModel->get_comentarios($pagamento->id)
+            'is_admin'    => $is_admin,
+            'usuario'     => $usuario,
+            'pagamento'   => $pagamento,
+            'comentarios' => $pagamentoModel->get_comentarios($pagamento->id)
         ]);
     }
 
@@ -71,6 +73,7 @@ class PagamentoController extends Controller {
         $pagamento = (object)$pagamentoModel->get($pagamento_id);
         $this->view->render('pagamento/edit', [
             'is_admin'  => $is_admin,
+            'usuario'   => $usuario,
             'pagamento' => $pagamento
         ]);
     }

@@ -9,7 +9,7 @@ class LoginController extends Controller {
         $this->view->render('login');
     }
 
-    public function autenticar() {
+    public function login() {
         $email = $_POST['email'] ?: '';
         $senha = $_POST['senha'] ?: '';
 
@@ -31,6 +31,15 @@ class LoginController extends Controller {
             'erro' => 'E-mail ou senha inválidos',
             'email' => $email
         ]);
+    }
+
+    public function logout(): void {
+        session_start();
+        session_unset();
+        session_destroy();
+
+        header('Location: /login');
+        exit;
     }
 
     public static function require_login() {

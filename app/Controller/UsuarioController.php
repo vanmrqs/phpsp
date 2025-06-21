@@ -16,6 +16,7 @@ class UsuarioController extends Controller {
         $usuario = new Usuario();
         $this->view->render('usuario/index', [
             'is_admin' => $is_admin,
+            'usuario'  => $usuario,
             'usuarios' => $usuario->get_all()
         ]);
     }
