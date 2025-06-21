@@ -51,6 +51,36 @@ class PagamentoController extends Controller {
         ]);
     }
 
+    public function edit(int $pagamento_id) {
+        LoginController::require_login();
+
+        $usuario    = $_SESSION['usuario'];
+
+        //@TODO: Especificar qual a vulnerabilidade pela falta desse IF
+        // ou trocar esse if para ver de outras pessoas
+        /*$is_admin   = (int)$usuario->tipo_usuario_id === Constants::TIPO_USUARIO_ADMIN;
+
+        if ( ! $is_admin ) {
+            $this->view->render('erro', [
+                'mensagem' => 'Acesso não autorizado'
+            ], 401);
+        }*/
+
+        $pagamentoModel      = new \Model\Pagamento();
+
+        if ( isset($_POST['bonus'], $_POST['descontos']) ) {
+            $pagamentoModel->edit($pagamento_id, $_POST['bonus'], $_POST['descontos']);
+            header('Location: /pagamento/view/' . $pagamento_id);
+            exit;
+        }
+
+        $pagamento           = (object)$pagamentoModel->get($pagamento_id);
+        $pagamento->detalhes = $pagamentoModel->get_detalhes($pagamento->id);
+        $this->view->render('pagamento/edit', [
+            'pagamento' => $pagamento
+        ]);
+    }
+
     public function set_comentario() {
         LoginController::require_login();
 

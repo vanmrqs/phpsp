@@ -8,7 +8,7 @@
             <h1> Pagamento {{ pagamento.mes }}/{{ pagamento.ano }} </h1>
             <h3> Colaborador: {{ pagamento.nome }} ({{ pagamento.cargo }}) </h3>
 
-            <a href="" class="botao-primario btn-pagamento-editar"> <i class="fa-solid fa-pen"></i> </a>
+            <a href="/pagamento/edit/{{ pagamento.id }}" class="botao-primario btn-pagamento-editar"> <i class="fa-solid fa-pen"></i> </a>
         </section>
 
         <table>

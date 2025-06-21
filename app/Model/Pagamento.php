@@ -125,4 +125,20 @@ class Pagamento {
 
         return $stmt->execute();
     }
+
+    public function edit(int $pagamento_id, float $bonus, float $descontos): bool {
+        $sql = "UPDATE pagamento_detalhe
+                SET
+                    pagamento_detalhe.bonus = :bonus,
+                    pagamento_detalhe.descontos = :descontos,
+                    pagamento_detalhe.total = ( pagamento_detalhe.salario_base + :bonus - :descontos )
+                WHERE pagamento_id = :pagamento_id";
+
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(':bonus', $bonus);
+        $stmt->bindValue(':descontos', $descontos);
+        $stmt->bindValue(':pagamento_id', $pagamento_id, PDO::PARAM_INT);
+
+        return $stmt->execute();
+    }
 }

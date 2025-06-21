@@ -37,6 +37,13 @@ $router->map('GET', '/pagamento/view/[i:id]', function(int $pagamento_id) {
     $pagamento->view($pagamento_id);
 });
 
+$router->map('GET|POST', '/pagamento/edit/[i:id]', function(int $pagamento_id) {
+    require_once __DIR__ . '/../app/Controller/PagamentoController.php';
+
+    $pagamento = new \Controller\PagamentoController();
+    $pagamento->edit($pagamento_id);
+});
+
 $router->map('POST', '/pagamento/comentar', function() {
     require_once __DIR__ . '/../app/Controller/PagamentoController.php';
 
