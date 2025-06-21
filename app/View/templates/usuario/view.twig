@@ -4,7 +4,11 @@
     {% include 'base/menu.twig' %}
 
     <section class="section-principal">
-        <section>
+        {% if exibir_mensagem_vulnerabilidade %}
+            {% include 'base/mensagem_vulnerabilidade.twig' %}
+        {% endif %}
+
+        <section class="position-relative">
             <h1> Usuário: {{ usuario.nome }} ({{ usuario.cargo }}) </h1>
 
             {% if is_admin %}

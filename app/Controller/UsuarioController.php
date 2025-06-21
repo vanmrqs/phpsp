@@ -42,10 +42,11 @@ class UsuarioController extends Controller {
         }*/
 
         $this->view->render('usuario/view', [
-            'is_admin'        => $is_admin,
-            'exibir_detalhes' => true,
-            'pagamentos'      => $pagamentos,
-            'usuario'         => $usuarioModel->get_by_id($usuario_id)
+            'is_admin'                        => $is_admin,
+            'exibir_detalhes'                 => true,
+            'pagamentos'                      => $pagamentos,
+            'usuario'                         => $usuarioModel->get_by_id($usuario_id),
+            'exibir_mensagem_vulnerabilidade' => ( ! $is_admin && $usuario_id !== (int)$usuarioLogado->id )
         ]);
     }
 }
