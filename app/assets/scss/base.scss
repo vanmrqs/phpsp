@@ -22,6 +22,13 @@ h1 {
         width: 35px;
         z-index: -1;
     }
+
+    & + h3 {
+        font-size: 15px;
+        font-weight: normal;
+        margin-bottom: 30px;
+        margin-top: -20px;
+    }
 }
 
 table {
@@ -54,6 +61,13 @@ button {
     color: #fff;
     cursor: pointer;
     padding: 5px;
+    transition: all 0.2s;
+}
+
+a {
+    color: $cor_primaria;
+    font-size: 12px;
+    text-transform: uppercase;
 }
 
 .section-principal {

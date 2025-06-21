@@ -1,0 +1,43 @@
+{% include 'base/head.twig' %}
+
+<main>
+    {% include 'base/menu.twig' %}
+
+    <section class="section-principal">
+        <h1> Pagamento {{ pagamento.mes }}/{{ pagamento.ano }} </h1>
+        <h3> Colaborador: {{ pagamento.nome }} ({{ pagamento.cargo }}) </h3>
+
+        <table>
+            <thead>
+                <tr>
+                    <th class="w-75"> Descrição </th>
+                    <th class="w-25"> Valor </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td> Salário base </td>
+                    <td class="text-end texto-positivo"> R$ {{ detalhes.salario_base }} </td>
+                </tr>
+
+                <tr>
+                    <td> Bônus </td>
+                    <td class="text-end texto-positivo"> R$ {{ detalhes.bonus }} </td>
+                </tr>
+
+                <tr>
+                    <td> Descontos </td>
+                    <td class="text-end texto-negativo"> -R$ {{ detalhes.descontos }} </td>
+                </tr>
+
+                <tr>
+                    <td> Total </td>
+                    <td class="text-end"> R$ {{ detalhes.total }} </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <a href="/" class="botao-secundario"> Voltar </a>
+    </section>
+</main>

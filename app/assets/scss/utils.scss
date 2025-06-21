@@ -1,0 +1,80 @@
+//
+// Botões
+//
+.botao-secundario {
+    background: #fff;
+    border: 1px solid $cor_secundaria;
+    color: $cor_secundaria;
+    float: right;
+    font-size: 14px;
+    font-weight: bold;
+    height: 35px;
+    margin-top: 40px;
+    text-transform: uppercase;
+    width: 150px;
+
+    &:hover {
+        background: $cor_secundaria;
+        color: #fff;
+    }
+}
+
+a.botao-secundario {
+    text-align: center;
+    line-height: 35px;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+//
+// Largura
+//
+.w-25 {
+    width: 25% !important;
+}
+
+.w-50 {
+    width: 50% !important;
+}
+
+.w-75 {
+    width: 75% !important;
+}
+
+.w-100 {
+    width: 100% !important;
+}
+
+.w-auto {
+    width: auto !important;
+}
+
+
+//
+// Texto - alinhamento
+//
+
+.text-start {
+    text-align: left;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-end {
+    text-align: right;
+}
+
+//
+// Texto - cor
+//
+.texto-positivo {
+    color: $cor_positivo;
+    font-weight: bold;
+}
+
+.texto-negativo {
+    color: $cor_negativo;
+    font-weight: bold;
+}

@@ -3,10 +3,9 @@
 namespace Controller;
 
 use App\Constants;
-use Controller\Controller;
 use Model\Pagamento;
 
-class Home extends Controller {
+class HomeController extends Controller {
     public function index() {
         if ( session_status() === PHP_SESSION_NONE ) {
             session_start();

@@ -1,25 +1,43 @@
 <?php
 
+use Model\Pagamento;
+
 require_once __DIR__ . '/../vendor/autoload.php';
 
 $router = new AltoRouter();
 
+//
+// Index
+//
 $router->map('GET', '/', function () {
-    require_once __DIR__ . '/../app/Controller/Home.php';
+    require_once __DIR__ . '/../app/Controller/HomeController.php';
 
-    $home = new Controller\Home();
+    $home = new Controller\HomeController();
     $home->index();
 });
 
+//
+// LoginController
+//
 $router->map('GET|POST', '/login', function() {
-    require_once __DIR__ . '/../app/Controller/Login.php';
+    require_once __DIR__ . '/../app/Controller/LoginController.php';
 
-    $login = new \Controller\Login();
+    $login = new \Controller\LoginController();
     if ( $_SERVER['REQUEST_METHOD'] === 'POST' ) {
         $login->autenticar();
     } else {
         $login->index();
     }
+});
+
+//
+// Pagamentos
+//
+$router->map('GET', '/pagamento/editar/[i:id]', function(int $pagamento_id) {
+    require_once __DIR__ . '/../app/Controller/PagamentoController.php';
+
+    $pagamento = new \Controller\PagamentoController();
+    $pagamento->editar($pagamento_id);
 });
 
 $match = $router->match();

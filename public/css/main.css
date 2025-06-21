@@ -22,6 +22,12 @@ h1:after {
   width: 35px;
   z-index: -1;
 }
+h1 + h3 {
+  font-size: 15px;
+  font-weight: normal;
+  margin-bottom: 30px;
+  margin-top: -20px;
+}
 
 table {
   width: 100%;
@@ -49,6 +55,13 @@ button {
   color: #fff;
   cursor: pointer;
   padding: 5px;
+  transition: all 0.2s;
+}
+
+a {
+  color: #005599;
+  font-size: 12px;
+  text-transform: uppercase;
 }
 
 .section-principal {
@@ -93,6 +106,72 @@ aside.menu ul {
   font-size: 20px;
   line-height: 40px;
   text-decoration: underline;
+}
+
+.botao-secundario {
+  background: #fff;
+  border: 1px solid #994400;
+  color: #994400;
+  float: right;
+  font-size: 14px;
+  font-weight: bold;
+  height: 35px;
+  margin-top: 40px;
+  text-transform: uppercase;
+  width: 150px;
+}
+.botao-secundario:hover {
+  background: #994400;
+  color: #fff;
+}
+
+a.botao-secundario {
+  text-align: center;
+  line-height: 35px;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.w-25 {
+  width: 25% !important;
+}
+
+.w-50 {
+  width: 50% !important;
+}
+
+.w-75 {
+  width: 75% !important;
+}
+
+.w-100 {
+  width: 100% !important;
+}
+
+.w-auto {
+  width: auto !important;
+}
+
+.text-start {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-end {
+  text-align: right;
+}
+
+.texto-positivo {
+  color: #00962a;
+  font-weight: bold;
+}
+
+.texto-negativo {
+  color: #6d0202;
+  font-weight: bold;
 }
 
 /*# sourceMappingURL=main.css.map */

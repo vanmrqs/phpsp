@@ -4,7 +4,7 @@ namespace Controller;
 
 use Model\Usuario;
 
-class Login extends Controller {
+class LoginController extends Controller {
     public function index() {
         $this->view->render('login');
     }
@@ -31,5 +31,16 @@ class Login extends Controller {
             'erro' => 'E-mail ou senha inválidos',
             'email' => $email
         ]);
+    }
+
+    public static function require_login() {
+        if ( session_status() === PHP_SESSION_NONE ) {
+            session_start();
+        }
+
+        if ( ! isset($_SESSION['usuario']) ) {
+            header('Location: /login');
+            exit;
+        }
     }
 }

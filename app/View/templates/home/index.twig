@@ -4,53 +4,33 @@
     {% include 'base/menu.twig' %}
 
     <section class="section-principal">
-        {% if is_admin %}
-            <h1> Pagamentos </h1>
+        <h1> {% if not is_admin %} Meus {% endif %} Pagamentos </h1>
 
-            <table>
-                <thead>
+        <table>
+            <thead>
+            <tr>
+                {% if is_admin %}
+                <th> Colaborador </th>
+                <th> Cargo </th>
+                {% endif %}
+                <th> Mês/Ano </th>
+                <th> Valor </th>
+                <th> Ações </th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for pagamento in pagamentos %}
                 <tr>
-                    <th> Colaborador </th>
-                    <th> Cargo </th>
-                    <th> Mês/Ano </th>
-                    <th> Valor </th>
-                    <th> Ações </th>
+                    {% if is_admin %}
+                    <td> {{ pagamento.colaborador_nome }} </td>
+                    <td> {{ pagamento.colaborador_cargo }} </td>
+                    {% endif %}
+                    <td> {{ pagamento.mes }}/{{ pagamento.ano }} </td>
+                    <td class="text-end"> R$ {{ pagamento.valor }} </td>
+                    <td class="text-center"> <a href="/pagamento/editar/{{ pagamento.id }}"> Ver </a> </td>
                 </tr>
-                </thead>
-                <tbody>
-                {% for pagamento in pagamentos %}
-                    <tr>
-                        <td> {{ pagamento.colaborador_nome }} </td>
-                        <td> {{ pagamento.colaborador_cargo }} </td>
-                        <td> {{ pagamento.mes }}/{{ pagamento.ano }} </td>
-                        <td> R$ {{ pagamento.valor }} </td>
-                        <td> Editar/contestar </td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        {% else %}
-            <h1> Meus Pagamentos </h1>
-
-            <table>
-                <thead>
-                <tr>
-                    <th> Mês/Ano </th>
-                    <th> Valor </th>
-                    <th> Ações </th>
-                </tr>
-                </thead>
-
-                <tbody>
-                {% for pagamento in pagamentos %}
-                    <tr>
-                        <td> {{ pagamento.mes }}/{{ pagamento.ano }} </td>
-                        <td> R$ {{ pagamento.valor }} </td>
-                        <td> Contestar </td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        {% endif %}
+            {% endfor %}
+            </tbody>
+        </table>
     </section>
 </main>
