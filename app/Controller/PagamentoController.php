@@ -26,7 +26,7 @@ class PagamentoController extends Controller {
         ]);
     }
 
-    public function editar(int $pagamento_id) {
+    public function view(int $pagamento_id) {
         LoginController::require_login();
 
         $usuario    = $_SESSION['usuario'];
@@ -44,7 +44,7 @@ class PagamentoController extends Controller {
         $pagamentoModel = new \Model\Pagamento();
         $pagamento      = (object)$pagamentoModel->get($pagamento_id);
         $detalhes       = $pagamentoModel->get_detalhes($pagamento->id);
-        $this->view->render('pagamento/edit', [
+        $this->view->render('pagamento/view', [
             'pagamento'   => $pagamento,
             'detalhes'    => $detalhes,
             'comentarios' => $pagamentoModel->get_comentarios($pagamento->id)
@@ -54,16 +54,16 @@ class PagamentoController extends Controller {
     public function set_comentario() {
         LoginController::require_login();
 
-        // @TODO: E se não passar esses dados?
         $pagamento_id = $_POST['pagamento_id'];
-        $comentario   = $_POST['comentario'];
+        $comentario   = trim($_POST['comentario']);
 
-        //@TODO: O usuário realmente pode fazer esse comentário?
-        //@TODO: Esse id, realmente existe?
+        if ( ! $pagamento_id || ! $comentario ) {
+            header('Location: /pagamento/view/' . $pagamento_id);
+        }
 
         $pagamentoModel = new \Model\Pagamento();
         $pagamentoModel->set_comentario($pagamento_id, $comentario);
 
-        header('Location: /pagamento/editar/' . $pagamento_id);
+        header('Location: /pagamento/view/' . $pagamento_id);
     }
 }

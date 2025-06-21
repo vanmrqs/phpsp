@@ -30,11 +30,11 @@ $router->map('GET', '/pagamento', function () {
     $pagamento->index();
 });
 
-$router->map('GET', '/pagamento/editar/[i:id]', function(int $pagamento_id) {
+$router->map('GET', '/pagamento/view/[i:id]', function(int $pagamento_id) {
     require_once __DIR__ . '/../app/Controller/PagamentoController.php';
 
     $pagamento = new \Controller\PagamentoController();
-    $pagamento->editar($pagamento_id);
+    $pagamento->view($pagamento_id);
 });
 
 $router->map('POST', '/pagamento/comentar', function() {

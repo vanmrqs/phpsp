@@ -1,6 +1,10 @@
 //
 // Botões
 //
+.botao-primario {
+    @include button;
+}
+
 .botao-secundario {
     background: #fff;
     border: 1px solid $cor_secundaria;
@@ -19,7 +23,7 @@
     }
 }
 
-a.botao-secundario {
+a.botao-primario, a.botao-secundario {
     text-align: center;
     line-height: 35px;
     text-decoration: none;

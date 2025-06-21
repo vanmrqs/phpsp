@@ -4,8 +4,12 @@
     {% include 'base/menu.twig' %}
 
     <section class="section-principal">
-        <h1> Pagamento {{ pagamento.mes }}/{{ pagamento.ano }} </h1>
-        <h3> Colaborador: {{ pagamento.nome }} ({{ pagamento.cargo }}) </h3>
+        <section>
+            <h1> Pagamento {{ pagamento.mes }}/{{ pagamento.ano }} </h1>
+            <h3> Colaborador: {{ pagamento.nome }} ({{ pagamento.cargo }}) </h3>
+
+            <a href="" class="botao-primario btn-pagamento-editar"> <i class="fa-solid fa-pen"></i> </a>
+        </section>
 
         <table>
             <thead>
@@ -56,7 +60,7 @@
 
                         <small> Adicionado em: {{ comentario.data_criacao }} </small>
 
-                        <p> {{ comentario.texto }} </p>
+                        <p> {{ comentario.texto|raw }} </p>
                     </div>
                 {% endfor %}
             </section>

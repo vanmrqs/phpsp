@@ -1,3 +1,11 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 100%;
+    vertical-align: middle;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -10,6 +18,7 @@ body {
 
 h1 {
     font-size: 35px;
+    margin: 28px 0;
 
     &:after {
         @include titulo_after;
@@ -51,14 +60,7 @@ table {
 }
 
 button {
-    background: $cor_primaria;
-    border: none;
-    border-radius: 2px;
-    color: #fff;
-    cursor: pointer;
-    height: 35px;
-    padding: 5px;
-    transition: all 0.2s;
+    @include button;
 }
 
 a {

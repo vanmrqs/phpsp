@@ -1,3 +1,11 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 100%;
+  vertical-align: middle;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -10,6 +18,7 @@ body {
 
 h1 {
   font-size: 35px;
+  margin: 28px 0;
 }
 h1:after {
   background: #994400;
@@ -50,13 +59,17 @@ table tr td {
 
 button {
   background: #005599;
-  border: none;
+  border: 1px solid #005599;
   border-radius: 2px;
   color: #fff;
   cursor: pointer;
   height: 35px;
   padding: 5px;
   transition: all 0.2s;
+}
+button:hover {
+  background: #fff;
+  color: #005599;
 }
 
 a {
@@ -113,6 +126,18 @@ aside.menu ul {
   text-decoration: underline;
 }
 
+.btn-pagamento-editar {
+  align-items: center;
+  display: flex;
+  height: 35px;
+  justify-content: center;
+  line-height: 35px;
+  position: absolute;
+  right: 80px;
+  top: 55px;
+  width: 35px;
+}
+
 .pagamento-form {
   display: flex;
   flex-direction: column;
@@ -150,6 +175,21 @@ aside.menu ul {
   margin-bottom: 5px;
 }
 
+.botao-primario {
+  background: #005599;
+  border: 1px solid #005599;
+  border-radius: 2px;
+  color: #fff;
+  cursor: pointer;
+  height: 35px;
+  padding: 5px;
+  transition: all 0.2s;
+}
+.botao-primario:hover {
+  background: #fff;
+  color: #005599;
+}
+
 .botao-secundario {
   background: #fff;
   border: 1px solid #994400;
@@ -167,7 +207,7 @@ aside.menu ul {
   color: #fff;
 }
 
-a.botao-secundario {
+a.botao-primario, a.botao-secundario {
   text-align: center;
   line-height: 35px;
   text-decoration: none;
