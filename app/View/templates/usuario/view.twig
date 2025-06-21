@@ -1,0 +1,42 @@
+{% include 'base/head.twig' %}
+
+<main>
+    {% include 'base/menu.twig' %}
+
+    <section class="section-principal">
+        <section>
+            <h1> Usuário: {{ usuario.nome }} ({{ usuario.cargo }}) </h1>
+
+            {% if is_admin %}
+                <a href="/usuarios/edit/{{ usuario.id }}" class="botao-primario btn-pagamento-editar"> <i class="fa-solid fa-pen"></i> </a>
+            {% endif %}
+        </section>
+
+        <section>
+            <form class="d-flex justify-content-between">
+                <div class="d-flex flex-column w-25">
+                    <label for="input-cpf"> CPF </label>
+                    <input class="w-100" type="text" name="cpf" id="input-cpf" value="{{ usuario.cpf }}" readonly>
+                </div>
+
+                <div class="d-flex flex-column w-25">
+                    <label for="input-email"> E-mail </label>
+                    <input class="w-100" type="email" name="email" id="input-email" value="{{ usuario.email }}" readonly>
+                </div>
+
+                <div class="d-flex flex-column w-25">
+                    <label for="input-telefone"> Telefone </label>
+                    <input class="w-100" type="text" name="telefone" id="input-telefone" value="{{ usuario.telefone }}" readonly>
+                </div>
+            </form>
+        </section>
+
+        <section>
+            <h3 class="subtitulo mt-5"> Histórico de pagamentos </h3>
+
+            {% include 'pagamento/partial_tabela.twig' %}
+        </section>
+
+        <a href="/usuarios" class="botao-secundario mb-5"> Voltar </a>
+    </section>
+</main>

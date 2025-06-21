@@ -34,7 +34,7 @@ $router->map('GET', '/pagamentos', function () {
     $pagamento->index();
 });
 
-$router->map('GET', '/pagamentos/view/[i:id]', function(int $pagamento_id) {
+$router->map('GET', '/pagamentos/[i:id]', function(int $pagamento_id) {
     require_once __DIR__ . '/../app/Controller/PagamentoController.php';
 
     $pagamento = new \Controller\PagamentoController();
@@ -61,9 +61,18 @@ $router->map('POST', '/pagamentos/comentar', function() {
 $router->map('GET', '/usuarios', function () {
     require_once __DIR__ . '/../app/Controller/UsuarioController.php';
 
-    $usuario = new Controller\UsuarioController();
-    $usuario->index();
+    $usuarioController = new Controller\UsuarioController();
+    $usuarioController->index();
 });
+
+$router->map('GET', '/usuarios/[i:id]', function(int $usuario_id) {
+    require_once __DIR__ . '/../app/Controller/UsuarioController.php';
+
+    $usuarioController = new \Controller\UsuarioController();
+    $usuarioController->view($usuario_id);
+});
+
+// core
 
 $match = $router->match();
 

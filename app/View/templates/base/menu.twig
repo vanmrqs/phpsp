@@ -3,6 +3,10 @@
 
     <ul class="d-flex justify-content-between align-items-center w-25">
         <li> <a href="/pagamentos"> Pagamentos </a> </li>
-        <li> <a href="/usuarios"> Usuários </a> </li>
+        {% if is_admin %}
+            <li> <a href="/usuarios"> Usuários </a> </li>
+        {% else %}
+            <li> <a href="/usuarios/{{ usuario.id }}"> Meu perfil </a> </li>
+        {% endif %}
     </ul>
 </nav>

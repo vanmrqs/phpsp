@@ -10,7 +10,7 @@ class Pagamento extends Model {
         $sql = "SELECT 
                     pagamento.id,
                     pagamento.usuario_id,
-                    LPAD(MONTH(pagamento.timepagamento), 2, '0') AS mes,
+                    MONTHNAME(pagamento.timepagamento) AS mes,
                     YEAR(pagamento.timepagamento) AS ano,
                     pagamento.valor,
                     usuario.nome,
@@ -35,11 +35,11 @@ class Pagamento extends Model {
             SELECT 
                 pagamento.id,
                 pagamento.usuario_id,
-                LPAD(MONTH(pagamento.timepagamento), 2, '0') AS mes,
+                MONTHNAME(pagamento.timepagamento) AS mes,
                 YEAR(pagamento.timepagamento) AS ano,
                 pagamento.valor,
-                usuario.nome AS colaborador_nome,
-                usuario.cargo AS colaborador_cargo
+                usuario.nome AS usuario_nome,
+                usuario.cargo AS usuario_cargo
             FROM pagamento
             INNER JOIN usuario
                 ON usuario.id = pagamento.usuario_id
@@ -53,42 +53,28 @@ class Pagamento extends Model {
 
     // Retorna os pagamentos de um usuário específico
     public function get_by_user_id(int $usuario_id): array {
-        $sql = "
-            SELECT 
-                pagamento.id,
-                pagamento.usuario_id,
-                LPAD(MONTH(pagamento.timepagamento), 2, '0') AS mes,
-                YEAR(pagamento.timepagamento) AS ano,
-                valor
-            FROM pagamento
-            WHERE usuario_id = :usuario_id
-            ORDER BY
-                timepagamento DESC";
+        $sql = "SELECT 
+                    pagamento.id,
+                    pagamento.usuario_id,
+                    MONTHNAME(pagamento.timepagamento) AS mes,
+                    YEAR(pagamento.timepagamento) AS ano,
+                    pagamento.valor,
+                    pagamento_detalhe.salario_base,
+                    pagamento_detalhe.descontos,
+                    pagamento_detalhe.bonus,
+                    pagamento_detalhe.total
+                FROM pagamento
+                INNER JOIN pagamento_detalhe
+                    ON pagamento.id = pagamento_detalhe.pagamento_id
+                WHERE usuario_id = :usuario_id
+                ORDER BY
+                    timepagamento DESC";
 
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindParam(':usuario_id', $usuario_id, PDO::PARAM_INT);
         $stmt->execute();
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-
-    public function get_detalhes(int $pagamento_id): ?array {
-        $sql = "SELECT 
-                    pagamento_detalhe.id,
-                    pagamento_detalhe.pagamento_id,
-                    pagamento_detalhe.salario_base,
-                    pagamento_detalhe.descontos,
-                    pagamento_detalhe.bonus,
-                    pagamento_detalhe.total
-                FROM pagamento_detalhe
-                WHERE pagamento_detalhe.pagamento_id = :pagamento_id";
-
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->bindParam(':pagamento_id', $pagamento_id, PDO::PARAM_INT);
-        $stmt->execute();
-
-        $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $resultado ?: null;
     }
 
     public function get_comentarios(int $pagamento_id): ?array {

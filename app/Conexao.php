@@ -18,6 +18,7 @@ class Conexao {
 
                 self::$pdo = new PDO("mysql:host={$db_host};dbname={$db_name};charset=utf8", $db_user, $db_pass);
                 self::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                self::$pdo->query("SET lc_time_names = 'pt_BR'");
             } catch ( PDOException $exception ) {
                 die('Erro na conexão: ' . $exception->getMessage());
             }

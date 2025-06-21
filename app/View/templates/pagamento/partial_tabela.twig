@@ -1,0 +1,36 @@
+<table>
+    <thead>
+    <tr>
+        {% if exibir_nome_e_cargo %}
+            <th> Nome </th>
+            <th> Cargo </th>
+        {% endif %}
+        <th> Mês/Ano </th>
+        {% if exibir_detalhes %}
+            <th> Salário base </th>
+            <th> Bônus </th>
+            <th> Desconto </th>
+        {% endif %}
+        <th> Valor </th>
+        <th> Ações </th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for pagamento in pagamentos %}
+        <tr>
+            {% if exibir_nome_e_cargo %}
+                <td> {{ pagamento.usuario_nome }} </td>
+                <td> {{ pagamento.usuario_cargo }} </td>
+            {% endif %}
+            <td> {{ pagamento.mes }}/{{ pagamento.ano }} </td>
+            {% if exibir_detalhes %}
+                <td class="text-end"> R$ {{ pagamento.salario_base }} </td>
+                <td class="text-end texto-positivo"> R$ {{ pagamento.bonus }} </td>
+                <td class="text-end texto-negativo"> R$ {{ pagamento.descontos }} </td>
+            {% endif %}
+            <td class="text-end"> R$ {{ pagamento.valor }} </td>
+            <td class="text-center"> <a href="/pagamentos/{{ pagamento.id }}"> Ver </a> </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

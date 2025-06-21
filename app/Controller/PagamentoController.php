@@ -7,14 +7,7 @@ use Model\Pagamento;
 
 class PagamentoController extends Controller {
     public function index() {
-        if ( session_status() === PHP_SESSION_NONE ) {
-            session_start();
-        }
-
-        if ( ! isset($_SESSION['usuario']) ) {
-            header('Location: /login');
-            exit;
-        }
+        LoginController::require_login();
 
         $usuario    = $_SESSION['usuario'];
         $is_admin   = (int)$usuario->tipo_usuario_id === Constants::TIPO_USUARIO_ADMIN;
@@ -44,12 +37,11 @@ class PagamentoController extends Controller {
             ], 401);
         }*/
 
-        $detalhes       = $pagamentoModel->get_detalhes($pagamento->id);
         $this->view->render('pagamento/view', [
-            'is_admin'    => $is_admin,
-            'pagamento'   => $pagamento,
-            'detalhes'    => $detalhes,
-            'comentarios' => $pagamentoModel->get_comentarios($pagamento->id)
+            'is_admin'            => $is_admin,
+            'exibir_nome_e_cargo' => $is_admin,
+            'pagamento'           => $pagamento,
+            'comentarios'         => $pagamentoModel->get_comentarios($pagamento->id)
         ]);
     }
 
@@ -60,9 +52,9 @@ class PagamentoController extends Controller {
 
         //@TODO: Especificar qual a vulnerabilidade pela falta desse IF
         // ou trocar esse if para ver de outras pessoas
-        /*$is_admin   = (int)$usuario->tipo_usuario_id === Constants::TIPO_USUARIO_ADMIN;
+        $is_admin   = (int)$usuario->tipo_usuario_id === Constants::TIPO_USUARIO_ADMIN;
 
-        if ( ! $is_admin ) {
+        /*if ( ! $is_admin ) {
             $this->view->render('erro', [
                 'mensagem' => 'Acesso não autorizado'
             ], 401);
@@ -72,13 +64,13 @@ class PagamentoController extends Controller {
 
         if ( isset($_POST['bonus'], $_POST['descontos']) ) {
             $pagamentoModel->edit($pagamento_id, $_POST['bonus'], $_POST['descontos']);
-            header('Location: /pagamentos/view/' . $pagamento_id);
+            header('Location: /pagamentos/' . $pagamento_id);
             exit;
         }
 
-        $pagamento           = (object)$pagamentoModel->get($pagamento_id);
-        $pagamento->detalhes = $pagamentoModel->get_detalhes($pagamento->id);
+        $pagamento = (object)$pagamentoModel->get($pagamento_id);
         $this->view->render('pagamento/edit', [
+            'is_admin'  => $is_admin,
             'pagamento' => $pagamento
         ]);
     }
@@ -90,12 +82,12 @@ class PagamentoController extends Controller {
         $comentario   = trim($_POST['comentario']);
 
         if ( ! $pagamento_id || ! $comentario ) {
-            header('Location: /pagamentos/view/' . $pagamento_id);
+            header('Location: /pagamentos/' . $pagamento_id);
         }
 
         $pagamentoModel = new \Model\Pagamento();
         $pagamentoModel->set_comentario($pagamento_id, $comentario);
 
-        header('Location: /pagamentos/view/' . $pagamento_id);
+        header('Location: /pagamentos/' . $pagamento_id);
     }
 }

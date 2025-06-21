@@ -6,7 +6,7 @@
     <section class="section-principal">
         <section>
             <h1> Pagamento {{ pagamento.mes }}/{{ pagamento.ano }} </h1>
-            <h3> Colaborador: {{ pagamento.nome }} ({{ pagamento.cargo }}) </h3>
+            <h3> Usuário: {{ pagamento.nome }} ({{ pagamento.cargo }}) </h3>
 
             {% if is_admin %}
                 <a href="/pagamentos/edit/{{ pagamento.id }}" class="botao-primario btn-pagamento-editar"> <i class="fa-solid fa-pen"></i> </a>
@@ -24,22 +24,22 @@
             <tbody>
                 <tr>
                     <td> Salário base </td>
-                    <td class="text-end texto-positivo"> R$ {{ detalhes.salario_base }} </td>
+                    <td class="text-end texto-positivo"> R$ {{ pagamento.salario_base }} </td>
                 </tr>
 
                 <tr>
                     <td> Bônus </td>
-                    <td class="text-end texto-positivo"> R$ {{ detalhes.bonus }} </td>
+                    <td class="text-end texto-positivo"> R$ {{ pagamento.bonus }} </td>
                 </tr>
 
                 <tr>
                     <td> Descontos </td>
-                    <td class="text-end texto-negativo"> -R$ {{ detalhes.descontos }} </td>
+                    <td class="text-end texto-negativo"> -R$ {{ pagamento.descontos }} </td>
                 </tr>
 
                 <tr>
                     <td> Total </td>
-                    <td class="text-end"> R$ {{ detalhes.total }} </td>
+                    <td class="text-end"> R$ {{ pagamento.total }} </td>
                 </tr>
             </tbody>
         </table>

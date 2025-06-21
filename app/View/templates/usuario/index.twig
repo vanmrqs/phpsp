@@ -25,7 +25,10 @@
                     <td> {{ usuario.cpf }} </td>
                     <td> {{ usuario.email }} </td>
                     <td> {{ usuario.telefone }}</td>
-                    <td class="text-center"> <a href="/colaborador/edit/{{ usuario.id }}"> Editar </a> </td>
+                    <td class="text-center">
+                        <a href="/usuarios/{{ usuario.id }}"> Ver </a>
+                        <a href="/usuarios/edit/{{ usuario.id }}"> Editar </a>
+                    </td>
                 </tr>
             {% endfor %}
             </tbody>

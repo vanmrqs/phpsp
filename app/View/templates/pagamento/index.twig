@@ -6,31 +6,6 @@
     <section class="section-principal">
         <h1> {% if not is_admin %} Meus {% endif %} Pagamentos </h1>
 
-        <table>
-            <thead>
-            <tr>
-                {% if is_admin %}
-                <th> Colaborador </th>
-                <th> Cargo </th>
-                {% endif %}
-                <th> Mês/Ano </th>
-                <th> Valor </th>
-                <th> Ações </th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for pagamento in pagamentos %}
-                <tr>
-                    {% if is_admin %}
-                    <td> {{ pagamento.colaborador_nome }} </td>
-                    <td> {{ pagamento.colaborador_cargo }} </td>
-                    {% endif %}
-                    <td> {{ pagamento.mes }}/{{ pagamento.ano }} </td>
-                    <td class="text-end"> R$ {{ pagamento.valor }} </td>
-                    <td class="text-center"> <a href="/pagamentos/view/{{ pagamento.id }}"> Ver </a> </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+        {% include 'pagamento/partial_tabela.twig' %}
     </section>
 </main>

@@ -6,30 +6,30 @@
     <section class="section-principal">
         <section>
             <h1> Pagamento {{ pagamento.mes }}/{{ pagamento.ano }} </h1>
-            <h3> Colaborador: {{ pagamento.nome }} ({{ pagamento.cargo }}) </h3>
+            <h3> Usuário: {{ pagamento.nome }} ({{ pagamento.cargo }}) </h3>
         </section>
 
         <form method="post" action="/pagamentos/edit/{{ pagamento.id }}" class="d-flex">
             <div class="d-flex flex-column">
                 <label for="input-salario-base"> Salário Base </label>
-                <input type="text" id="input-salario-base" name="salario-base" value="{{ pagamento.detalhes.salario_base }}" readonly>
+                <input type="text" id="input-salario-base" name="salario-base" value="{{ pagamento.salario_base }}" readonly>
             </div>
 
             <div class="d-flex flex-column ms-5">
                 <label for="input-bonus"> Bônus </label>
-                <input type="text" id="input-bonus" name="bonus" value="{{ pagamento.detalhes.bonus }}">
+                <input type="text" id="input-bonus" name="bonus" value="{{ pagamento.bonus }}">
             </div>
 
             <div class="d-flex flex-column ms-5">
                 <label for="input-desconto"> Desconto </label>
-                <input type="text" id="input-desconto" name="descontos" value="{{ pagamento.detalhes.descontos }}">
+                <input type="text" id="input-desconto" name="descontos" value="{{ pagamento.descontos }}">
             </div>
 
             <button type="submit" class="mt-5 position-absolute btn-pagamento-salvar"> Salvar </button>
         </form>
 
         <small class="fst-italic mt-3 d-inline-block">
-            *Cuidado! Você está editando um pagamento de um colaborador. Qualquer
+            *Cuidado! Você está editando um pagamento de um usua´rio. Qualquer
             alteração realizada afetará diretamente o valor depositado em conta.
         </small>
     </section>
