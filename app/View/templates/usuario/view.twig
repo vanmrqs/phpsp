@@ -12,7 +12,9 @@
             <h1> Usuário: {{ usuario.nome }} ({{ usuario.cargo }}) </h1>
 
             {% if is_admin %}
-                <a href="/usuarios/edit/{{ usuario.id }}" class="botao-primario btn-pagamento-editar"> <i class="fa-solid fa-pen"></i> </a>
+                <a href="/usuarios/edit/{{ usuario.id }}" class="botao-primario btn-pagamento-editar btn-usuario-admin">
+                    <i class="fa-solid fa-user-tie me-2"></i> Tornar administrador
+                </a>
             {% endif %}
         </section>
 

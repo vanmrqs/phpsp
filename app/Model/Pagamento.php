@@ -14,10 +14,16 @@ class Pagamento extends Model {
                     YEAR(pagamento.timepagamento) AS ano,
                     pagamento.valor,
                     usuario.nome,
-                    usuario.cargo
+                    usuario.cargo,
+                    pagamento_detalhe.salario_base,
+                    pagamento_detalhe.descontos,
+                    pagamento_detalhe.bonus,
+                    pagamento_detalhe.total
                 FROM pagamento
                 INNER JOIN usuario
                     ON usuario.id = pagamento.usuario_id
+                INNER JOIN pagamento_detalhe
+                    ON pagamento.id = pagamento_detalhe.pagamento_id
                 WHERE pagamento.id = :id
                 LIMIT 1";
 
@@ -39,7 +45,14 @@ class Pagamento extends Model {
                 YEAR(pagamento.timepagamento) AS ano,
                 pagamento.valor,
                 usuario.nome AS usuario_nome,
-                usuario.cargo AS usuario_cargo
+                usuario.cargo AS usuario_cargo,
+                (
+                    SELECT 1
+                    FROM pagamento_comentario
+                    WHERE pagamento.id = pagamento_comentario.pagamento_id
+                        AND pagamento_comentario.lido = 0
+                    LIMIT 1
+                ) AS has_comentarios_nao_lidos
             FROM pagamento
             INNER JOIN usuario
                 ON usuario.id = pagamento.usuario_id

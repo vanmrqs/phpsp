@@ -4,7 +4,7 @@
     {% include 'base/menu.twig' %}
 
     <section class="section-principal">
-        <section>
+        <section class="position-relative">
             <h1> Pagamento {{ pagamento.mes }}/{{ pagamento.ano }} </h1>
             <h3> Usuário: {{ pagamento.nome }} ({{ pagamento.cargo }}) </h3>
 
@@ -52,7 +52,7 @@
                 <small> Caso tenha algo errado com o seu pagamento ou com os valores, nos conte aqui, para resolvermos o mais rápido possível</small>
                 <textarea name="comentario" id="input-pagamento-comentario" rows="5"></textarea>
 
-                <button type="submit" class="mt-1"> Enviar </button>
+                <button type="submit" class="mt-1 mb-5"> Enviar </button>
             </form>
 
             <section>

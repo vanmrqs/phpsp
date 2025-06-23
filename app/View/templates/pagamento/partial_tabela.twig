@@ -29,7 +29,12 @@
                 <td class="text-end texto-negativo"> R$ {{ pagamento.descontos }} </td>
             {% endif %}
             <td class="text-end"> R$ {{ pagamento.valor }} </td>
-            <td class="text-center"> <a href="/pagamentos/{{ pagamento.id }}"> Ver </a> </td>
+            <td class="text-center">
+                <a href="/pagamentos/{{ pagamento.id }}"> Ver </a>
+                {% if pagamento.has_comentarios_nao_lidos %}
+                    <i class="fa-solid fa-bell icon-comentario-nao-lido" aria-hidden="true"></i>
+                {% endif %}
+            </td>
         </tr>
     {% endfor %}
     </tbody>

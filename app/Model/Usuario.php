@@ -3,6 +3,7 @@
 namespace Model;
 
 use App\Conexao;
+use App\Constants;
 use PDO;
 
 class Usuario extends Model {
@@ -14,13 +15,16 @@ class Usuario extends Model {
                     usuario.id,
                     usuario.nome,
                     usuario.senha,
-                    usuario.tipo_usuario_id
+                    ( usuario.tipo_usuario_id = :tipo_admin ) AS is_admin
                 FROM usuario
                 WHERE email = :email
                 LIMIT 1";
 
         $stmt = $pdo->prepare($sql);
-        $stmt->execute(['email' => $email]);
+        $stmt->execute([
+            'email'      => $email,
+            'tipo_admin' => Constants::TIPO_USUARIO_ADMIN
+        ]);
 
         $usuario = $stmt->fetch(PDO::FETCH_OBJ);
 
@@ -41,9 +45,11 @@ class Usuario extends Model {
                     usuario.cargo,
                     usuario.tipo_usuario_id
                 FROM usuario
+                WHERE usuario.tipo_usuario_id = :tipo_usuario_comum
                 ORDER BY usuario.nome";
 
-        $stmt = $this->pdo->query($sql);
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute(['tipo_usuario_comum' => Constants::TIPO_USUARIO_COMUM]);
         $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($usuarios as &$usuario) {
@@ -97,5 +103,19 @@ class Usuario extends Model {
         }
 
         return null;
+    }
+
+    public function set_admin(int $usuario_id): bool {
+        $pdo = \App\Conexao::conectar();
+
+        $sql = "UPDATE usuario
+                SET tipo_usuario_id = :tipo_usuario_admin
+                WHERE id = :usuario_id";
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindValue(':usuario_id', $usuario_id, PDO::PARAM_INT);
+        $stmt->bindValue(':tipo_usuario_admin', Constants::TIPO_USUARIO_ADMIN, PDO::PARAM_INT);
+
+        return $stmt->execute();
     }
 }

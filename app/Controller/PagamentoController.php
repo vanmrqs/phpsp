@@ -9,38 +9,34 @@ class PagamentoController extends Controller {
     public function index() {
         LoginController::require_login();
 
-        $usuario    = $_SESSION['usuario'];
-        $is_admin   = (int)$usuario->tipo_usuario_id === Constants::TIPO_USUARIO_ADMIN;
-
+        $usuario = $_SESSION['usuario'];
         $pagamento = new Pagamento();
         $this->view->render('pagamento/index', [
-            'is_admin'            => $is_admin,
+            'is_admin'            => $usuario->is_admin,
             'usuario'             => $usuario,
-            'exibir_nome_e_cargo' => $is_admin,
-            'pagamentos'          => ( $is_admin ) ? $pagamento->get_all() : $pagamento->get_by_user_id($usuario->id)
+            'exibir_nome_e_cargo' => $usuario->is_admin,
+            'pagamentos'          => ( $usuario->is_admin ) ? $pagamento->get_all() : $pagamento->get_by_user_id($usuario->id)
         ]);
     }
 
     public function view(int $pagamento_id) {
         LoginController::require_login();
 
-        $usuario    = $_SESSION['usuario'];
-
-        $is_admin   = (int)$usuario->tipo_usuario_id === Constants::TIPO_USUARIO_ADMIN;
+        $usuario        = $_SESSION['usuario'];
 
         $pagamentoModel = new \Model\Pagamento();
         $pagamento      = (object)$pagamentoModel->get($pagamento_id);
 
         //@TODO: Especificar qual a vulnerabilidade pela falta desse IF
         //@TODO: Access Broken Control
-        /*if ( ! $is_admin && $pagamento->usuario_id !== $usuario->id ) {
+        /*if ( ! $usuario->is_admin && $pagamento->usuario_id !== $usuario->id ) {
             $this->view->render('erro', [
                 'mensagem' => 'Acesso não autorizado'
             ], 401);
         }*/
 
         $this->view->render('pagamento/view', [
-            'is_admin'    => $is_admin,
+            'is_admin'    => $usuario->is_admin,
             'usuario'     => $usuario,
             'pagamento'   => $pagamento,
             'comentarios' => $pagamentoModel->get_comentarios($pagamento->id)
@@ -54,9 +50,7 @@ class PagamentoController extends Controller {
 
         //@TODO: Especificar qual a vulnerabilidade pela falta desse IF
         // ou trocar esse if para ver de outras pessoas
-        $is_admin   = (int)$usuario->tipo_usuario_id === Constants::TIPO_USUARIO_ADMIN;
-
-        /*if ( ! $is_admin ) {
+        /*if ( ! $usuario->is_admin ) {
             $this->view->render('erro', [
                 'mensagem' => 'Acesso não autorizado'
             ], 401);
@@ -72,7 +66,7 @@ class PagamentoController extends Controller {
 
         $pagamento = (object)$pagamentoModel->get($pagamento_id);
         $this->view->render('pagamento/edit', [
-            'is_admin'  => $is_admin,
+            'is_admin'  => $usuario->is_admin,
             'usuario'   => $usuario,
             'pagamento' => $pagamento
         ]);

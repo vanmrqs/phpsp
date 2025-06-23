@@ -4,6 +4,8 @@
     {% include 'base/menu.twig' %}
 
     <section class="section-principal">
+        <span> Olá, {{ usuario.nome }} </span>
+
         <h1> {% if not is_admin %} Meus {% endif %} Pagamentos </h1>
 
         {% include 'pagamento/partial_tabela.twig' %}
